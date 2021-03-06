@@ -1,0 +1,242 @@
+#:import utils kivy.utils
+
+AppManager:
+    MainMenu:
+
+    Dictionary:
+    Beginner:
+    Intermediate:
+    Expert:
+
+
+<MainMenu>:
+    name: "main_menu"
+
+    GridLayout:
+        cols: 1
+        Label:
+            background_color: 0.2, 0.13, 0.54, 1
+            text: "Difficulty Lv"
+            font_size: 40
+            bold: True
+
+        GridLayout:
+            cols: 1
+
+            Button:
+                text: "Beginner"
+                font_size:40
+                background_color: utils.get_color_from_hex('#14e114')
+                on_release:
+                    app.root.current = "beginner"
+                    root.beginner_lv()
+                    root.manager.transition.direction = "up"
+
+
+
+
+            Button:
+                text: "Intermediate"
+                font_size:40
+                background_color: utils.get_color_from_hex('#e5ff24')
+                on_release:
+                    app.root.current = "intermediate"
+                    root.intermediate_lv()
+                    root.manager.transition.direction = "up"
+
+            Button:
+                text: "Expert"
+                font_size:40
+                background_color: utils.get_color_from_hex('#c22e2e')
+                on_release:
+                    app.root.current = "expert"
+                    root.expert_lv()
+                    root.manager.transition.direction = "up"
+
+            Button:
+                text: "Dictionary"
+                font_size:40
+                background_color: utils.get_color_from_hex('#148ce1')
+                on_release:
+                    app.root.current = "dictionary"
+                    root.manager.transition.direction = "up"
+
+
+
+
+<Beginner>
+    name: "beginner"
+    the_word: the_word
+    RelativeLayout:
+        Label:
+            text: "Beginner"
+            color: utils.get_color_from_hex('#e5ff24')
+            font_size: 40
+            bold: True
+            pos_hint: { 'y': 0.4 ,'x': .0}
+
+        Label:
+            text: "Say:"
+            font_size: 40
+            bold: True
+            pos_hint: { 'y': 0.2 ,'x': .0}
+
+        Label:
+            id: the_word
+            text: the_word.text
+            font_size: 40
+            bold: True
+            pos_hint: { 'y': 0.1 ,'x': .01}
+
+        Button:
+            text: "Menu"
+            size: 200,50
+            size_hint: None, None
+            pos_hint: { 'y': 0.2 ,'x': .38}
+            on_release:
+
+                app.root.current = "main_menu"
+                root.manager.transition.direction = "down"
+        Button:
+            size: 200,50
+            size_hint: None, None
+            pos_hint: { 'y': 0.3 ,'x': .38}
+            text: "New Word"
+            on_press:
+                root.set_text()
+
+            on_release:
+                root.generate_word()
+
+
+
+
+<Intermediate>
+    name: "intermediate"
+    the_word: the_word
+    RelativeLayout:
+
+        Label:
+            text: "Intermediate"
+            color: utils.get_color_from_hex('#e5ff24')
+            font_size: 40
+            bold: True
+            pos_hint: { 'y': 0.4 ,'x': .0}
+
+        Label:
+            text: "Say:"
+            font_size: 40
+            bold: True
+            pos_hint: { 'y': 0.2 ,'x': .0}
+
+        Label:
+            id: the_word
+            text: the_word.text
+            font_size: 40
+            bold: True
+            pos_hint: { 'y': 0.1 ,'x': .01}
+
+
+        Button:
+            text: "Menu"
+            size: 200,50
+            size_hint: None, None
+            pos_hint: { 'y': 0.2 ,'x': .38}
+            on_release:
+
+                app.root.current = "main_menu"
+                root.manager.transition.direction = "down"
+        Button:
+            size: 200,50
+            size_hint: None, None
+            pos_hint: { 'y': 0.3 ,'x': .38}
+            text: "New Word"
+            on_press:
+                root.set_text()
+
+            on_release:
+                root.generate_word()
+
+
+<Expert>
+    name: "expert"
+    the_word: the_word
+    RelativeLayout:
+
+        Label:
+            text: "Expert"
+            color: utils.get_color_from_hex('#c22e2e')
+            font_size: 40
+            bold: True
+            pos_hint: { 'y': 0.4 ,'x': .0}
+
+        Label:
+            text: "Say:"
+            font_size: 40
+            bold: True
+            pos_hint: { 'y': 0.2 ,'x': .0}
+
+        Label:
+            id: the_word
+            text: the_word.text
+            font_size: 40
+            bold: True
+            pos_hint: { 'y': 0.1 ,'x': .01}
+
+
+        Button:
+            text: "Menu"
+            size: 200,50
+            size_hint: None, None
+            pos_hint: { 'y': 0.2 ,'x': .38}
+            on_release:
+
+                app.root.current = "main_menu"
+                root.manager.transition.direction = "down"
+        Button:
+            size: 200,50
+            size_hint: None, None
+            pos_hint: { 'y': 0.3 ,'x': .38}
+            text: "New Word"
+            on_press:
+                root.set_text()
+
+            on_release:
+                root.generate_word()
+
+
+<Dictionary>
+    name: "dictionary"
+    typed_word: typed_word
+    RelativeLayout:
+
+        Label:
+            text: "Search definition for a word"
+            font_size: 40
+            bold: True
+            pos_hint: { 'y': 0.1 ,'x': .01}
+
+        TextInput:
+            id: typed_word
+            size: 500,40
+            size_hint: None, None
+            multiline: False
+            background_color: 1, 1, 1, 0.6
+            font_size: 20
+            pos_hint: { 'y': 0.5 ,'x': .2}
+
+        Button:
+            size: 200,50
+            size_hint: None, None
+            pos_hint: { 'y': 0.2 ,'x': .38}
+            text: "Menu"
+            on_release:
+                app.root.current = "main_menu"
+                root.manager.transition.direction = "down"
+        Button:
+            size: 200,50
+            size_hint: None, None
+            pos_hint: { 'y': 0.3 ,'x': .38}
+            text: "Search"
+            on_release:
+                root.search()
